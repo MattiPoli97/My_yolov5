@@ -1,0 +1,5 @@
+train: datasets/Kvasir-instrument/train/images
+val: datasets/Kvasir-instrument
+
+nc: 1
+names: ['instrument']

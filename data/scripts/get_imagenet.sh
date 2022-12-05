@@ -6,7 +6,7 @@
 # ├── yolov5
 # └── datasets
 #     └── imagenet  ← downloads here
-
+import wget
 # Arguments (optional) Usage: bash data/scripts/get_imagenet.sh --train --val
 if [ "$#" -gt 0 ]; then
   for opt in "$@"; do
@@ -21,7 +21,7 @@ else
 fi
 
 # Make dir
-d='../datasets/imagenet' # unzip directory
+d='../My_yolov5/datasets/imagenet' # unzip directory
 mkdir -p $d && cd $d
 
 # Download/unzip train

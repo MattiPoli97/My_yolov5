@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['half-ripe', 'raw', 'ripe']
+
+roboflow:
+  workspace: ssd-kiq1o
+  project: detection-vw9ph
+  version: 2
+  license: MIT
+  url: https://universe.roboflow.com/ssd-kiq1o/detection-vw9ph/dataset/2
