@@ -6,6 +6,7 @@ import shutil
 
 input_path = "../My_yolov5/datasets/kvasir-instrument/train/labels"
 output_path = "../My_yolov5/datasets/kvasir-instrument/train"
+output_path_test = "../My_yolov5/datasets/kvasir-instrument/test"
 
 f = open('bboxes.json')
 data = json.load(f)
@@ -29,20 +30,36 @@ print(data[id[0]]['bbox'][0]['label']) # access to label information of specific
 print(len(data[id[0]]['bbox'])) # number of annotation for specific i-file
 
 count = 0
+count1=0
+created = False
 
-for i in range (0,len(id)): #for each data[id[i]] --> create a txt file
+with open("test.txt", "r") as f:
+    content = f.readlines()
+
+print((content))
+content = [i.replace('\n','') for i in content]
+print(content)
+
+for i in range(0, len(id)):  # for each data[id[i]] --> create a txt file
     # Extracting image
     img_id = id[i]
     img_w = data[id[i]]['width']
     img_h = data[id[i]]['height']
 
     # Opening file for current image
-    file_object = open(f"{output_path}/labels/{img_id}.txt", "a")
+    if img_id in content:
+        print("test")
+        count = count + 1
+        file_object = open(f"{output_path_test}/labels/{img_id}.txt", "a")
+    else:
+        print("train")
+        count1 = count1 + 1
+        file_object = open(f"{output_path}/labels/{img_id}.txt", "a")
 
-    for ann in range(0,len(data[id[i]]['bbox'])):
+    for ann in range(0, len(data[id[i]]['bbox'])):
         label = data[id[0]]['bbox'][0]['label']
 
-        current_category = 0 # We have only instrument
+        current_category = 0  # We have only instrument
         x = data[id[i]]['bbox'][ann]['xmin']
         y = data[id[i]]['bbox'][ann]['ymin']
         w = data[id[i]]['bbox'][ann]['xmax']
@@ -55,8 +72,8 @@ for i in range (0,len(id)): #for each data[id[i]] --> create a txt file
         # Normalization
         x_centre = x_centre / img_w
         y_centre = y_centre / img_h
-        w = (w-x) / img_w
-        h = (h-y) / img_h
+        w = (w - x) / img_w
+        h = (h - y) / img_h
 
         # Limiting upto fix number of decimal places
         x_centre = format(x_centre, '.6f')

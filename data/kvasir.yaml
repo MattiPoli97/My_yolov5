@@ -1,5 +1,5 @@
 train: datasets/Kvasir-instrument/train/images
-val: datasets/Kvasir-instrument
+val: datasets/Kvasir-instrument/test
 
 nc: 1
 names: ['instrument']
